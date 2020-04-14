@@ -30,7 +30,7 @@ class Bullets extends Phaser.Physics.Arcade.Group {
     super(scene.physics.world, scene);
 
     this.bullets = this.createMultiple({
-      frameQuantity: 2,
+      frameQuantity: 1,
       key: 'bullet',
       active: false,
       visible: false,
@@ -97,12 +97,65 @@ class Example extends Phaser.Scene {
     this.load.image('otherPlayer', 'assets/enemyBlack5.png');
     this.load.image('star', 'assets/star_gold.png');
     this.load.image('bullet', 'assets/bullet.png');
+    this.load.image('sky', 'assets/forests.png');
+    this.load.image('forest', 'assets/forestt.png');
+    this.load.image('land', 'assets/land1.png');
+    this.load.image('barrel', 'assets/barrel.png');
   }
 
   create() {
     var self = this;
     this.socket = io();
+
+    this.physics.world.setBounds(0, 245, 800, 600-245);
+    this.add.image(400, 150, 'sky');
+    this.add.image(0, 245, 'forest');
+    this.add.image(250, 245, 'forest');
+    this.add.image(500, 245, 'forest');
+    this.add.image(750, 245, 'forest');
+    this.add.image(15, 360, 'land');
+    this.add.image(115, 360, 'land');
+    this.add.image(215, 360, 'land');
+    this.add.image(315, 360, 'land');
+    this.add.image(415, 360, 'land');
+    this.add.image(515, 360, 'land');
+    this.add.image(615, 360, 'land');
+    this.add.image(715, 360, 'land');
+    this.add.image(15, 415, 'land');
+    this.add.image(115, 415, 'land');
+    this.add.image(215, 415, 'land');
+    this.add.image(315, 415, 'land');
+    this.add.image(415, 415, 'land');
+    this.add.image(515, 415, 'land');
+    this.add.image(615, 415, 'land');
+    this.add.image(715, 415, 'land');
+    this.add.image(15, 465, 'land');
+    this.add.image(115, 465, 'land');
+    this.add.image(215, 465, 'land');
+    this.add.image(315, 465, 'land');
+    this.add.image(415, 465, 'land');
+    this.add.image(515, 465, 'land');
+    this.add.image(615, 465, 'land');
+    this.add.image(715, 465, 'land');
+    this.add.image(15, 515, 'land');
+    this.add.image(115, 515, 'land');
+    this.add.image(215, 515, 'land');
+    this.add.image(315, 515, 'land');
+    this.add.image(415, 515, 'land');
+    this.add.image(515, 515, 'land');
+    this.add.image(615, 515, 'land');
+    this.add.image(715, 515, 'land');
+    this.add.image(15, 565, 'land');
+    this.add.image(115, 565, 'land');
+    this.add.image(215, 565, 'land');
+    this.add.image(315, 565, 'land');
+    this.add.image(415, 565, 'land');
+    this.add.image(515, 565, 'land');
+    this.add.image(615, 565, 'land');
+    this.add.image(715, 565, 'land');
+
     this.otherPlayers = this.physics.add.group();
+
     this.socket.on('currentPlayers', function (players) {
       Object.keys(players).forEach(function (id) {
         if (players[id].playerId === self.socket.id) {
@@ -237,6 +290,10 @@ class Example extends Phaser.Scene {
     } else {
       this.ship.setTint(0xff0000);
     }
+
+    this.ship.setCollideWorldBounds(true);
+
+    // var barrel = this.add.tileSprite(400, 400, 90, 90, 'barrel');
 
     this.data.set('playerInfo', playerInfo);
     this.bullets = new Bullets(this);

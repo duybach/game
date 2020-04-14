@@ -7,7 +7,7 @@ var players = {};
 
 var star = {
   x: Math.floor(Math.random() * 700) + 50,
-  y: Math.floor(Math.random() * 500) + 50
+  y: Math.floor(Math.random() * 350) + 250
 };
 var scores = {
   blue: 0,
@@ -25,7 +25,7 @@ io.on('connection', function (socket) {
   // create a new player and add it to our players object
   players[socket.id] = {
     x: Math.floor(Math.random() * 700) + 50,
-    y: Math.floor(Math.random() * 500) + 50,
+    y: Math.floor(Math.random() * 350) + 250,
     playerId: socket.id,
     team: (Math.floor(Math.random() * 2) == 0) ? 'red' : 'blue'
   };
@@ -71,7 +71,7 @@ io.on('connection', function (socket) {
     setTimeout(
       function() {
         players[socket.id].x = Math.floor(Math.random() * 700) + 50;
-        players[socket.id].y = Math.floor(Math.random() * 500) + 50;
+        players[socket.id].y = Math.floor(Math.random() * 350) + 250;
         players[socket.id].death = false;
 
         io.emit('playerRespawned', players[socket.id]);
@@ -89,7 +89,7 @@ io.on('connection', function (socket) {
       scores.blue += 10;
     }
     star.x = Math.floor(Math.random() * 700) + 50;
-    star.y = Math.floor(Math.random() * 500) + 50;
+    star.y = Math.floor(Math.random() * 350) + 250;
     io.emit('starLocation', star);
     io.emit('scoreUpdate', scores);
   });
